@@ -26,6 +26,7 @@ const Timer: React.FC<TimerProps> = ({ task, isRunning, onComplete }) => {
   useEffect(() => {
     if (isRunning) {
       setTimeLeft(task.steps[0].duration);
+      announce(`Starting ${task.name}. First step: ${task.steps[0].name}`);
     }
   }, [isRunning, task]);
 
