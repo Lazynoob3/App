@@ -22,21 +22,29 @@ const Timer: React.FC<TimerProps> = ({ task, isRunning, onComplete }) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
   const [isBreak, setIsBreak] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
 
-  // Initialize first step
+  // Initialize and start the first step
   useEffect(() => {
-    if (isRunning) {
+    if (isRunning && !hasStarted) {
+      setHasStarted(true);
       setCurrentStepIndex(0);
       setTimeLeft(task.steps[0].duration);
       setIsBreak(false);
-      announce(`Starting ${task.name}. First step: ${task.steps[0].name}`);
+      // Announce the start of practice and first step
+      setTimeout(() => {
+        announce(`Starting ${task.name}`);
+        setTimeout(() => {
+          announce(`First step: ${task.steps[0].name}`);
+        }, 2000);
+      }, 500);
     }
-  }, [isRunning, task]);
+  }, [isRunning, task, hasStarted]);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
-    if (isRunning && timeLeft > 0) {
+    if (isRunning && timeLeft > 0 && hasStarted) {
       timer = setInterval(() => {
         setTimeLeft((prev) => prev - 1);
         announceTime(timeLeft - 1);

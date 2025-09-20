@@ -27,14 +27,20 @@ A web-based application that helps you create and follow yoga practice routines 
 2. **Starting a Practice**
    - Find your routine in the list
    - Click "Start Practice"
-   - The app will follow this sequence for each practice:
-     1. Announces the practice name
-     2. Announces the first step name
-     3. Starts the timer for the step duration
-     4. Announces the break time (if set)
-     5. Repeats steps 2-4 for each subsequent pose
-   - The timer will show the remaining time for each step and break
-   - Voice announcements will guide you through transitions
+   - The app will follow this precise sequence for each practice:
+     1. Announces "Starting [Practice Name]"
+     2. After 2 seconds, announces "First step: [Step Name]"
+     3. Starts the timer for the first step's duration
+     4. Countdown announcements for last 3 seconds of each step
+     5. After step completes, announces "Break time" (if break is set)
+     6. After break, announces next step name
+     7. Repeats steps 3-6 for each subsequent pose
+     8. Announces "Practice complete!" at the end
+   - The timer display shows:
+     - Current step name or "Break"
+     - Time remaining in minutes and seconds
+     - Current step number and total steps
+   - Voice announcements guide you through all transitions
 
 ## 💻 Technical Details (For Developers)
 
@@ -90,11 +96,25 @@ App/
    - Manages countdown timer
    - Handles voice announcements
    - Shows progress through steps
+   - State Management:
+     - `currentStepIndex`: Tracks current step
+     - `timeLeft`: Remaining time for step/break
+     - `isBreak`: Whether in break period
+     - `hasStarted`: Ensures proper initialization
    - Sequence of operations:
-     1. Announces practice name and first step
-     2. Runs the timer for step duration
-     3. Announces any breaks between steps
-     4. Proceeds to next step
+     1. When practice starts:
+        - Announces practice name
+        - Waits 2 seconds
+        - Announces first step name
+        - Begins step timer
+     2. During each step:
+        - Shows countdown timer
+        - Announces last 3 seconds
+        - Transitions to break or next step
+     3. During breaks:
+        - Shows break countdown
+        - Announces next step when break ends
+     4. Completes when all steps are done
    - Features:
      - Visual countdown
      - Step progress indicator
