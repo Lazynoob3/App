@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import TaskForm from './TaskForm';
+import Timer from './Timer';
+
+interface Step {
+  name: string;
+  duration: number;
+  breakDuration: number;
+}
+
+interface Task {
+  id: number;
+  name: string;
+  steps: Step[];
+}
+
+const Dashboard: React.FC = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [activeTask, setActiveTask] = useState<Task | null>(null);
+  const [isRunning, setIsRunning] = useState(false);
+
+  const handleAddTask = (newTask: Task) => {
+    setTasks([...tasks, { ...newTask, id: Date.now() }]);
+  };
+
+  const startTask = (task: Task) => {
+    setActiveTask(task);
+    setIsRunning(true);
+  };
+
+  const stopTask = () => {
+    setActiveTask(null);
+    setIsRunning(false);
+  };
+
+  return (
+    <div className="dashboard">
+      <div className="tasks-section">
+        <h2>Your Yoga Tasks</h2>
+        <TaskForm onAddTask={handleAddTask} />
+        <div className="tasks-list">
+          {tasks.map(task => (
+            <div key={task.id} className="task-item">
+              <h3>{task.name}</h3>
+              <p>Steps: {task.steps.length}</p>
+              <button onClick={() => startTask(task)}>Start Practice</button>
+            </div>
+          ))}
+        </div>
+      </div>
+      {activeTask && (
+        <div className="timer-section">
+          <Timer
+            task={activeTask}
+            isRunning={isRunning}
+            onComplete={stopTask}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Dashboard;

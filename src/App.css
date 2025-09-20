@@ -1,0 +1,118 @@
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.tasks-section, .timer-section {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.task-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.task-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-form input {
+  padding: 8px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.step-form {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.steps-list {
+  margin: 15px 0;
+}
+
+.step-item {
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border: 1px solid #eee;
+}
+
+.tasks-list {
+  display: grid;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.task-item {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.timer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.time-display {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.current-step {
+  margin: 20px 0;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button[type="button"] {
+  background-color: #008CBA;
+}
+
+button[type="button"]:hover {
+  background-color: #007399;
+}
